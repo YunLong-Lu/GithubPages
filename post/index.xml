@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 卢云龙的技术博客</title>
-    <link>https://YunLong-Lu.github.io/GithubPages/post/</link>
+    <link>https://YunLong-Lu.github.io/post/</link>
     <description>Recent content in Posts on 卢云龙的技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 15 Apr 2020 22:58:56 +0800</lastBuildDate>
     
-	<atom:link href="https://YunLong-Lu.github.io/GithubPages/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://YunLong-Lu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>博客内容第二次上传更新</title>
-      <link>https://YunLong-Lu.github.io/GithubPages/post/my-second-blog/</link>
+      <link>https://YunLong-Lu.github.io/post/my-second-blog/</link>
       <pubDate>Wed, 15 Apr 2020 22:58:56 +0800</pubDate>
       
-      <guid>https://YunLong-Lu.github.io/GithubPages/post/my-second-blog/</guid>
+      <guid>https://YunLong-Lu.github.io/post/my-second-blog/</guid>
       <description>第二篇测试博客 这是标题 测试的内容</description>
     </item>
     
     <item>
       <title>My First Blog</title>
-      <link>https://YunLong-Lu.github.io/GithubPages/post/my-first-blog/</link>
+      <link>https://YunLong-Lu.github.io/post/my-first-blog/</link>
       <pubDate>Sat, 11 Apr 2020 18:52:56 +0800</pubDate>
       
-      <guid>https://YunLong-Lu.github.io/GithubPages/post/my-first-blog/</guid>
+      <guid>https://YunLong-Lu.github.io/post/my-first-blog/</guid>
       <description>test code Test My First Blog 测试&amp;quot;Hugo&amp;quot;搭建博客</description>
     </item>
     
     <item>
       <title>[中文] 《长恨歌》</title>
-      <link>https://YunLong-Lu.github.io/GithubPages/post/chinese-preview/</link>
+      <link>https://YunLong-Lu.github.io/post/chinese-preview/</link>
       <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
       
-      <guid>https://YunLong-Lu.github.io/GithubPages/post/chinese-preview/</guid>
+      <guid>https://YunLong-Lu.github.io/post/chinese-preview/</guid>
       <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难</description>
     </item>
     
