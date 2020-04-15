@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 卢云龙的技术博客</title>
+    <link>https://YunLong-Lu.github.io/GithubPages/categories/</link>
+    <description>Recent content in Categories on 卢云龙的技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 11 Apr 2020 18:52:56 +0800</lastBuildDate>
+    
+	<atom:link href="https://YunLong-Lu.github.io/GithubPages/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Typescript</title>
+      <link>https://YunLong-Lu.github.io/GithubPages/categories/typescript/</link>
+      <pubDate>Sat, 11 Apr 2020 18:52:56 +0800</pubDate>
+      
+      <guid>https://YunLong-Lu.github.io/GithubPages/categories/typescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>中文</title>
+      <link>https://YunLong-Lu.github.io/GithubPages/categories/%E4%B8%AD%E6%96%87/</link>
+      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
+      
+      <guid>https://YunLong-Lu.github.io/GithubPages/categories/%E4%B8%AD%E6%96%87/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
