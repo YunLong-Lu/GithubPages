@@ -1,2 +1,0 @@
-User-agent: *
-Sitemap: https://YunLong-Lu.github.io/GithubPages/sitemap.xml
