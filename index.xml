@@ -6,7 +6,7 @@
     <description>Recent content on 卢云龙的技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 15 Apr 2020 22:58:56 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Apr 2020 21:55:26 +0800</lastBuildDate>
     
 	<atom:link href="https://YunLong-Lu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -21,30 +21,12 @@
     </item>
     
     <item>
-      <title>博客内容第二次上传更新</title>
-      <link>https://YunLong-Lu.github.io/post/my-second-blog/</link>
-      <pubDate>Wed, 15 Apr 2020 22:58:56 +0800</pubDate>
+      <title>关于远程办公这件事</title>
+      <link>https://YunLong-Lu.github.io/post/about-telecommuting/</link>
+      <pubDate>Thu, 16 Apr 2020 21:55:26 +0800</pubDate>
       
-      <guid>https://YunLong-Lu.github.io/post/my-second-blog/</guid>
-      <description>第二篇测试博客 这是标题 测试的内容</description>
-    </item>
-    
-    <item>
-      <title>My First Blog</title>
-      <link>https://YunLong-Lu.github.io/post/my-first-blog/</link>
-      <pubDate>Sat, 11 Apr 2020 18:52:56 +0800</pubDate>
-      
-      <guid>https://YunLong-Lu.github.io/post/my-first-blog/</guid>
-      <description>test code Test My First Blog 测试&amp;quot;Hugo&amp;quot;搭建博客</description>
-    </item>
-    
-    <item>
-      <title>[中文] 《长恨歌》</title>
-      <link>https://YunLong-Lu.github.io/post/chinese-preview/</link>
-      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
-      
-      <guid>https://YunLong-Lu.github.io/post/chinese-preview/</guid>
-      <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难</description>
+      <guid>https://YunLong-Lu.github.io/post/about-telecommuting/</guid>
+      <description>因为最近的疫情问题公司开始了远程办公，到目前已经两个半月了。 早在两三年之前遇到过一些大神，每天和他们交流发现有些人是远程办公，略有羡慕，后来</description>
     </item>
     
   </channel>
