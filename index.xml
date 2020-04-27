@@ -6,7 +6,7 @@
     <description>Recent content on 卢云龙的技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 16 Apr 2020 21:55:26 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 26 Apr 2020 22:00:49 +0800</lastBuildDate>
     
 	<atom:link href="https://YunLong-Lu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,17 @@
       
       <guid>https://YunLong-Lu.github.io/about/</guid>
       <description>卢云龙</description>
+    </item>
+    
+    <item>
+      <title>Androidx与support.v4冲突问题</title>
+      <link>https://YunLong-Lu.github.io/post/reslove-androidx-support.v4/</link>
+      <pubDate>Sun, 26 Apr 2020 22:00:49 +0800</pubDate>
+      
+      <guid>https://YunLong-Lu.github.io/post/reslove-androidx-support.v4/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>

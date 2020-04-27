@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Androidx与support.v4冲突问题 - 卢云龙的技术博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="卢云龙" /><meta name="description" content=" 最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+" /><meta name="keywords" content="Cocos Creator, Typescript, Android, iOS" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.2 with theme even" />
+
+
+<link rel="canonical" href="https://YunLong-Lu.github.io/post/reslove-androidx-support.v4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Androidx与support.v4冲突问题" />
+<meta property="og:description" content="
+最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://YunLong-Lu.github.io/post/reslove-androidx-support.v4/" />
+<meta property="article:published_time" content="2020-04-26T22:00:49+08:00" />
+<meta property="article:modified_time" content="2020-04-26T22:00:49+08:00" />
+<meta itemprop="name" content="Androidx与support.v4冲突问题">
+<meta itemprop="description" content="
+最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+">
+<meta itemprop="datePublished" content="2020-04-26T22:00:49&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-26T22:00:49&#43;08:00" />
+<meta itemprop="wordCount" content="976">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Androidx与support.v4冲突问题"/>
+<meta name="twitter:description" content="
+最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">卢云龙</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">卢云龙</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Androidx与support.v4冲突问题</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-26 </span>
+        
+          <span class="more-meta"> 约 976 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。</p>
+</blockquote>
+<p>接入SDK后打包发生问题如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Process: packagename, PID: 22181
+    java.lang.NoClassDefFoundError: Failed resolution of: Landroid/support/v4/app/FragmentManager$FragmentLifecycleCallbacks;
+        at android.arch.lifecycle.LifecycleDispatcher.init(LifecycleDispatcher.java:58)
+        at android.arch.lifecycle.ProcessLifecycleOwnerInitializer.onCreate(ProcessLifecycleOwnerInitializer.java:35)
+        at android.content.ContentProvider.attachInfo(ContentProvider.java:2101)
+        at android.content.ContentProvider.attachInfo(ContentProvider.java:2075)
+        at android.app.ActivityThread.installProvider(ActivityThread.java:7147)
+        at android.app.ActivityThread.installContentProviders(ActivityThread.java:6630)
+        at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6525)
+        at android.app.ActivityThread.access$1400(ActivityThread.java:220)
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1883)
+        at android.os.Handler.dispatchMessage(Handler.java:107)
+        at android.os.Looper.loop(Looper.java:224)
+        at android.app.ActivityThread.main(ActivityThread.java:7520)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:539)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:950)
+     Caused by: java.lang.ClassNotFoundException: Didn&#39;t find class &#34;android.support.v4.app.FragmentManager$FragmentLifecycleCallbacks&#34; on path: DexPathList[[zip file &#34;/data/app/packagename-ir6wH0r_cvF-StUhV3NDeg==/base.apk&#34;],nativeLibraryDirectories=[/data/app/packagename-ir6wH0r_cvF-StUhV3NDeg==/lib/arm64, /data/app/packagename-ir6wH0r_cvF-StUhV3NDeg==/base.apk!/lib/arm64-v8a, /system/lib64, /system/product/lib64]]
+        at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:230)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+        at android.arch.lifecycle.LifecycleDispatcher.init(LifecycleDispatcher.java:58) 
+        at android.arch.lifecycle.ProcessLifecycleOwnerInitializer.onCreate(ProcessLifecycleOwnerInitializer.java:35) 
+        at android.content.ContentProvider.attachInfo(ContentProvider.java:2101) 
+        at android.content.ContentProvider.attachInfo(ContentProvider.java:2075) 
+        at android.app.ActivityThread.installProvider(ActivityThread.java:7147) 
+        at android.app.ActivityThread.installContentProviders(ActivityThread.java:6630) 
+        at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6525) 
+        at android.app.ActivityThread.access$1400(ActivityThread.java:220) 
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1883) 
+        at android.os.Handler.dispatchMessage(Handler.java:107) 
+        at android.os.Looper.loop(Looper.java:224) 
+        at android.app.ActivityThread.main(ActivityThread.java:7520) 
+        at java.lang.reflect.Method.invoke(Native Method) 
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:539) 
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:950) 
+2020-04-26 21:53:02.095 22181-22181/packagename E/MQSEventManagerDelegate: failed to get MQSService.
+</code></pre></td></tr></table>
+</div>
+</div><p>从上面的报错信息可以看出包里面是缺少了support.v4的依赖，所以此时的解决办法就是添加依赖包，在App下的build里面引入</p>
+<p><code>dependencies { implementation 'com.android.support:support-v4:27.1.1' }</code></p>
+<p>这次引入之后还没来得及打包就直接“红色”报错，在看一下代码发现上面引入了androidx，冲突了，这也是我心慌的点，我只记得之前的一次报错我是直接将v4包删掉了，但这次不一样，第三方库必须要使用v4。我去查了一下之前的修改方法，结果发现确实是自己忘记了上次的修改方法。</p>
+<p>当时的修改记录里面还有：修改当前项目的 gradle.properties 添加下面两句代码</p>
+<p><code>android.useAndroidX=true</code></p>
+<p><code>android.enableJetifier=true</code></p>
+<blockquote>
+<p>android.useAndroidX=true 表示当前项目启用 AndroidX
+android.enableJetifier=true 表示将依赖包也迁移到AndroidX 。
+如果取值为 false ,表示不迁移依赖包到AndroidX，但在使用依赖包中的内容时可能会出现问题，当然了，如果你的项目中没有使用任何三方依赖，那么，此项可以设置为 false。
+(ps：这里是当时修改的时候的注释内容，但是非常惭愧的是我想不起是哪为大神的文章给出的指导，还是应该给他说声谢谢，半年之后再次为我排忧解难)</p>
+</blockquote>
+<p>这样修改之后打包，然后又冲突了</p>
+<p><code>Program type already present: androidx.lifecycle.ClassesInfoCache$CallbackInfo</code></p>
+<p>这种问题就不慌了，直接排除掉这个引用就可以了，同样是App内的build，我是两个冲突，全部排除，问题解决</p>
+<p><code>configurations.all { exclude group: 'androidx.lifecycle' exclude group: 'androidx.arch.core' }</code></p>
+<p>总结一下就是问题及时记录，这次的修改算不上是什么大的问题，也算不上是一次像样的技术分享，更多的是提醒自己吧。想想之前解决这次问题的方法也许更值得分享，最初的缺少v4依赖，到最终解决，碰到的每个问题代表什么含义，为什么会出现这个问题，然后找到解决方法（what、why、how）三步，是我这个刚刚接触到Android开发的菜鸟最应该记住的东西。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">卢云龙</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-26
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/about-telecommuting/">
+            <span class="next-text nav-default">关于远程办公这件事</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'lpjJE0evJx9lN6sit0U42TpF-MdYXbMMI',
+        appKey: 'IgrfJKxRgptRadIdNxd4OHSv',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yunlong95@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/YunLong-Lu" class="iconfont icon-github" title="github"></a>
+  <a href="https://YunLong-Lu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">卢云龙</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
