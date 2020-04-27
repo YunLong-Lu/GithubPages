@@ -18,7 +18,7 @@
       
       <guid>https://YunLong-Lu.github.io/post/reslove-androidx-support.v4/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。&lt;/p&gt;
+&lt;p&gt;最近两天接手了一个同事上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同事升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起大概半年前碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     

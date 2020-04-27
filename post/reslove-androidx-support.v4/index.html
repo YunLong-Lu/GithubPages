@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="卢云龙" /><meta name="description" content=" 最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+<meta name="author" content="卢云龙" /><meta name="description" content=" 最近两天接手了一个同事上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同事升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起大概半年前碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
 " /><meta name="keywords" content="Cocos Creator, Typescript, Android, iOS" />
 
 
@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Androidx与support.v4冲突问题" />
 <meta property="og:description" content="
-最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+最近两天接手了一个同事上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同事升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起大概半年前碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://YunLong-Lu.github.io/post/reslove-androidx-support.v4/" />
@@ -49,18 +49,18 @@
 <meta property="article:modified_time" content="2020-04-26T22:00:49+08:00" />
 <meta itemprop="name" content="Androidx与support.v4冲突问题">
 <meta itemprop="description" content="
-最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+最近两天接手了一个同事上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同事升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起大概半年前碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
 ">
 <meta itemprop="datePublished" content="2020-04-26T22:00:49&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-26T22:00:49&#43;08:00" />
-<meta itemprop="wordCount" content="976">
+<meta itemprop="wordCount" content="981">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Androidx与support.v4冲突问题"/>
 <meta name="twitter:description" content="
-最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
+最近两天接手了一个同事上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同事升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起大概半年前碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。
 "/>
 
 <!--[if lte IE 9]>
@@ -133,7 +133,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-04-26 </span>
         
-          <span class="more-meta"> 约 976 字 </span>
+          <span class="more-meta"> 约 981 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -147,7 +147,7 @@
 </div>
     <div class="post-content">
       <blockquote>
-<p>最近两天接手了一个同时上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同时升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。</p>
+<p>最近两天接手了一个同事上传的Android工程，需要接入一个第三方的SDK，接入完成开始打包报了错,检查后发现是同事升级了AndroidX,而我接入的第三方SDK引用了android.support.v4。瞬间有点蒙，还查了半天资料如何解决，突然想起大概半年前碰到过这个问题，本着再一再二不再三的原则，这次要记录在案。</p>
 </blockquote>
 <p>接入SDK后打包发生问题如下：</p>
 <div class="highlight"><div class="chroma">
