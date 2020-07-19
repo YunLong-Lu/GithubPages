@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>关于微信小游戏本地超出50M的一个解决方案 - 卢云龙的技术博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="卢云龙" /><meta name="description" content=" 最近在做微信小游戏的项目，使用的是cocos creator的引擎做的开发，虽然引擎方有MD5码但是在清理本地缓存文件的功能上并不完善，在版本不断的迭代添加新的内容之后发现本地的缓存文件逐渐增长，有超出50M的趋势，经测试发现超出后就不能进入游戏了， 因此到了必须要解决的时候了。
+" /><meta name="keywords" content="WeChat MiniGame" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.2 with theme even" />
+
+
+<link rel="canonical" href="https://YunLong-Lu.github.io/post/wechat_clear_file/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="关于微信小游戏本地超出50M的一个解决方案" />
+<meta property="og:description" content="
+最近在做微信小游戏的项目，使用的是cocos creator的引擎做的开发，虽然引擎方有MD5码但是在清理本地缓存文件的功能上并不完善，在版本不断的迭代添加新的内容之后发现本地的缓存文件逐渐增长，有超出50M的趋势，经测试发现超出后就不能进入游戏了，
+因此到了必须要解决的时候了。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://YunLong-Lu.github.io/post/wechat_clear_file/" />
+<meta property="article:published_time" content="2020-07-16T22:36:31+08:00" />
+<meta property="article:modified_time" content="2020-07-16T22:36:31+08:00" />
+<meta itemprop="name" content="关于微信小游戏本地超出50M的一个解决方案">
+<meta itemprop="description" content="
+最近在做微信小游戏的项目，使用的是cocos creator的引擎做的开发，虽然引擎方有MD5码但是在清理本地缓存文件的功能上并不完善，在版本不断的迭代添加新的内容之后发现本地的缓存文件逐渐增长，有超出50M的趋势，经测试发现超出后就不能进入游戏了，
+因此到了必须要解决的时候了。
+">
+<meta itemprop="datePublished" content="2020-07-16T22:36:31&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-16T22:36:31&#43;08:00" />
+<meta itemprop="wordCount" content="1795">
+
+
+
+<meta itemprop="keywords" content="微信小游戏,cocos creator,javascript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="关于微信小游戏本地超出50M的一个解决方案"/>
+<meta name="twitter:description" content="
+最近在做微信小游戏的项目，使用的是cocos creator的引擎做的开发，虽然引擎方有MD5码但是在清理本地缓存文件的功能上并不完善，在版本不断的迭代添加新的内容之后发现本地的缓存文件逐渐增长，有超出50M的趋势，经测试发现超出后就不能进入游戏了，
+因此到了必须要解决的时候了。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">卢云龙</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">卢云龙</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">关于微信小游戏本地超出50M的一个解决方案</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BB%8F%E9%AA%8C%E4%B9%8B%E8%B0%88/"> 经验之谈 </a>
+            </div>
+          <span class="more-meta"> 约 1795 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#如何找到需要删除的文件">如何找到需要删除的文件？</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>最近在做微信小游戏的项目，使用的是cocos creator的引擎做的开发，虽然引擎方有MD5码但是在清理本地缓存文件的功能上并不完善，在版本不断的迭代添加新的内容之后发现本地的缓存文件逐渐增长，有超出50M的趋势，经测试发现超出后就不能进入游戏了，
+因此到了必须要解决的时候了。</p>
+</blockquote>
+<p>首先是理清解决问题的思路：</p>
+<ol>
+<li>找到目标文件。</li>
+<li>计算目标文件的大小。</li>
+<li>判断目标文件的大小是否达到限制，是&ndash;&gt;清理， 否&ndash;&gt;进入游戏</li>
+</ol>
+<p>整理好了思路接下来就是针对每一步的具体分析操作。</p>
+<h1 id="找目标文件">找目标文件</h1>
+<blockquote>
+<p>微信提供了这方面的接口：</p>
+</blockquote>
+<p><a href="https://developers.weixin.qq.com/minigame/dev/api/file/FileSystemManager.rmdir.html">FileSystemManager.rmdir(Object object)</a> 删除目录</p>
+<p><a href="https://developers.weixin.qq.com/minigame/dev/api/file/FileSystemManager.readdir.html">FileSystemManager.readdir(Object object)</a> 读取目录内文件列表</p>
+<p><a href="https://developers.weixin.qq.com/minigame/dev/api/file/FileSystemManager.getFileInfo.html">FileSystemManager.getFileInfo(Object object)</a>  获取该小程序下的 本地临时文件 或 本地缓存文件 信息</p>
+<p>这些就是清理操作所需要的的几个接口，具体的接口信息可以阅读<a href="https://developers.weixin.qq.com/minigame/dev/api/file/FileSystemManager.html">微信官方文档</a>。</p>
+<h2 id="如何找到需要删除的文件">如何找到需要删除的文件？</h2>
+<p>&lt;wx.env.USER_DATA_PATH + &lsquo;/gamecaches'&gt;  这是cocos creator 生成的存放游戏资源的文件地址，使用readdir接口就可以读取到这个文件价下面资源列表</p>
+<p>如果这个文件下面还有游戏方自己下载的压缩包解压后的文件夹，可以使用读取的接口进行递归，然后获取列表信息（我在测试删除解压的文件的时候因为某些文件名带有中文导致下载到本地之后出现文件名乱码，导致最终微信的rmdir操作失败，即使删除游戏、删除微信都不能删除这些乱码文件的信息，但是实际上这些文件已经不存在与内存中，经测试并没有占用50M的内存空间，这个问题待后面找出解决办法再做分享）。</p>
+<h1 id="计算文件大小是否达到限制">计算文件大小是否达到限制</h1>
+<p>我最开始想的是文件触发50M的限制之后进行删除操作，但是查了微信官方文档和cocos creator文档以及相关的论坛之后发现并不存在这样一个接口，而是触发之后直接报错，作为开发者是收不到警告的，因此这里就只有一个办法 ：自己找出文件计算大小。（这里必须要吐槽一下，微信既然做了这个限制，个人觉得就应该在触发限制后给出警告消息，不给警告也至少给一个目前存了多少东西给个统计也行啊，不然真的碰到的之后只能抓瞎。同时也要批评一下cocos creator 既然做了MD5 也知道问题的存在，咋就不改呢？）。</p>
+<p>对于计算文件大小这里我最开始的做法是找出所有文件，然后获取文件大小，进行累加之后判断是否达到了50M，这会造成一个问题，如果本地存储达到了49.99M也不会触发清除操作，那么我的游戏再更新超过0.01M就会卡死。所以只能讲条件往前移，那么多少是合适的呢？我根据我们游戏现有的资源，以及将来可能的更新给出了一个25M的值，即达到25M就进行一次清理。但是这又有一个新的问题，如果每次进入游戏都进行计算那么每次都已有大概1-2秒的时间无法进入游戏，这个影响很大哦。最后决定每隔几个版本进行一次，具体的可以根据游戏的更新频率计算。</p>
+<h1 id="执行清理操作">执行清理操作</h1>
+<p>这个方法就简单粗暴了，直接调用微信的rmdir清理获取的每个文件就可以了。</p>
+<p>最后贴一下我最终的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&#39;use strict&#39;;
+
+import { async } from &#34;./utils/runtime&#34;;
+let regeneratorRuntime = require(&#39;./utils/runtime&#39;);
+
+const FileSize = 25; //清理资源的总量
+const FilesName = [&#34;new_download&#34;, &#34;test_download&#34;, &#34;img_download&#34;]; //游戏方下载的压缩包解压后的文件夹
+
+/**
+ * 执行删除操作
+ * filePath 需要删除的文件目录
+ */
+window.doDelete = function(filePath){
+    let fs = wx.getFileSystemManager();
+    return new Promise((resolve, reject) =&gt; {
+        fs.rmdir({
+            dirPath: filePath,
+            recursive: true,
+            success: () =&gt; {
+                resolve();
+            }
+        });
+    })
+}
+
+/**
+ * 查找目标文件夹
+ * filePath 文件目录
+ */
+window.findFile = function(filePath){
+    let fs = wx.getFileSystemManager();
+    let size = 0;
+    let counts = 0;
+    let num = 0;
+    let now = new Date().getTime();
+    let fileLength = 0;
+    
+    console.log(&#34;fs start time = &#34;, now);
+    console.log(&#34;readdir filePath = &#34;, filePath);
+    
+    let deleteFile = async function(resolve){
+        if ((size / 1024 / 1024) &gt; FileSize &amp;&amp; num &lt; 1) {
+            num++;
+            let _now = new Date().getTime();
+            let _time = (_now - now) / 1000;
+            console.log(&#34;计算25M资源花费时间 time = &#34;, _time.toFixed(2) + &#34;秒&#34;, &#34;, path = &#34;, filePath);
+            await window.doDelete(filePath);
+            resolve(0);
+        } else if(counts &gt;= fileLength){
+            let _now = new Date().getTime();
+            let _time = (_now - now) / 1000;
+            let _size = size / 1024 / 1024;
+            console.log(&#34;计算花费时间 time = &#34;, _time.toFixed(2) + &#34;秒&#34;, &#34;, 文件总量 size = &#34;, _size.toFixed(2) + &#34;M&#34;, &#34;, path = &#34;, filePath);
+            resolve(size);
+        }
+    }
+
+    return new Promise((resolve, reject) =&gt; {
+        try {
+            fs.readdir({
+                dirPath: filePath,
+                success: async (res) =&gt; {
+                    console.log(&#34;readdir success fileList:&#34;, res);
+                    let fileList = res.files;
+                    fileLength = fileList.length;
+                    for (let i = 0; i &lt; fileLength; i++) {
+                        let path = filePath + &#39;/&#39; + fileList[i];
+
+                        //如果是文件夹进行递归查询
+                        if(FilesName.indexOf(fileList[i]) &gt;= 0){
+
+                            let _size = await window.findFile(path);
+                            size += _size;
+                            counts++;
+                            if(counts &gt;= fileList.length){
+                                deleteFile(resolve);
+                            } else {
+                                continue;
+                            }
+                        }
+
+                        //获取文件的大小信息
+                        fs.getFileInfo({
+                            filePath: path,
+                            success: (res) =&gt; {
+                                size += res.size;
+                                counts++;
+                                deleteFile(resolve);
+                            },
+                            fail: async (res) =&gt; {
+                                console.log(&#34;getFileInfo error :&#34;, res.errMsg);
+                                resolve(0);
+                            },
+                        })
+                    }
+                },
+
+                fail: (err) =&gt; {
+                    console.log(&#34;readdir err:&#34;, err);
+                    resolve(0);
+                },
+
+                complete: () =&gt; {
+                    console.log(&#34;readdir complete&#34;);
+                }
+            })
+        } catch (error) {
+            console.log(&#34;readdir 获取该小程序下的 本地临时文件 或 本地缓存文件 信息失败 error：&#34;, error);
+        }
+    })
+}
+window.FileManager = async function () {
+    
+    let filePath = wx.env.USER_DATA_PATH + &#39;/gamecaches&#39;;
+    await window.findFile(filePath);
+}
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">卢云龙</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-07-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F/">微信小游戏</a>
+          <a href="/tags/cocos-creator/">cocos creator</a>
+          <a href="/tags/javascript/">javascript</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/reslove-androidx-support.v4/">
+            <span class="next-text nav-default">Androidx与support.v4冲突问题</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'lpjJE0evJx9lN6sit0U42TpF-MdYXbMMI',
+        appKey: 'IgrfJKxRgptRadIdNxd4OHSv',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yunlong95@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/YunLong-Lu" class="iconfont icon-github" title="github"></a>
+  <a href="https://YunLong-Lu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">卢云龙</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

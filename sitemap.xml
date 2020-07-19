@@ -9,6 +9,69 @@
   </url>
   
   <url>
+    <loc>https://YunLong-Lu.github.io/categories/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/tags/cocos-creator/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/tags/javascript/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/post/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/tags/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/post/wechat_clear_file/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://YunLong-Lu.github.io/categories/%E7%BB%8F%E9%AA%8C%E4%B9%8B%E8%B0%88/</loc>
+    <lastmod>2020-07-16T22:36:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://YunLong-Lu.github.io/post/reslove-androidx-support.v4/</loc>
     <lastmod>2020-04-26T22:00:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,29 +79,8 @@
   </url>
   
   <url>
-    <loc>https://YunLong-Lu.github.io/post/</loc>
+    <loc>https://YunLong-Lu.github.io/tags/java/</loc>
     <lastmod>2020-04-26T22:00:49+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://YunLong-Lu.github.io/</loc>
-    <lastmod>2020-04-26T22:00:49+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://YunLong-Lu.github.io/categories/</loc>
-    <lastmod>2020-04-16T21:55:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://YunLong-Lu.github.io/tags/</loc>
-    <lastmod>2020-04-16T21:55:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -52,13 +94,6 @@
   
   <url>
     <loc>https://YunLong-Lu.github.io/post/about-telecommuting/</loc>
-    <lastmod>2020-04-16T21:55:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://YunLong-Lu.github.io/categories/%E7%BB%8F%E9%AA%8C%E4%B9%8B%E8%B0%88/</loc>
     <lastmod>2020-04-16T21:55:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

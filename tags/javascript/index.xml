@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on 卢云龙的技术博客</title>
+    <link>https://YunLong-Lu.github.io/tags/javascript/</link>
+    <description>Recent content in javascript on 卢云龙的技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 16 Jul 2020 22:36:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://YunLong-Lu.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于微信小游戏本地超出50M的一个解决方案</title>
+      <link>https://YunLong-Lu.github.io/post/wechat_clear_file/</link>
+      <pubDate>Thu, 16 Jul 2020 22:36:31 +0800</pubDate>
+      
+      <guid>https://YunLong-Lu.github.io/post/wechat_clear_file/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;最近在做微信小游戏的项目，使用的是cocos creator的引擎做的开发，虽然引擎方有MD5码但是在清理本地缓存文件的功能上并不完善，在版本不断的迭代添加新的内容之后发现本地的缓存文件逐渐增长，有超出50M的趋势，经测试发现超出后就不能进入游戏了，
+因此到了必须要解决的时候了。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
